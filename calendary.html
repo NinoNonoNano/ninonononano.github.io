@@ -31,6 +31,7 @@
             document.getElementById('day').innerHTML = getDayNumFromDate(STARTDATE);
             document.getElementById('moonPhases').innerHTML = moonPhases[(getMoonPhase(STARTDATE))];
             document.getElementById('moonPhasesNumber').innerHTML = (getMoonPhase(STARTDATE));
+            document.getElementById('getDateFromDayNum').innerHTML = getDateFromDayNum(DAY, YEAR);
         }
 
         function getDayNumFromDate(date) {
@@ -95,6 +96,7 @@
     <label id='date' class='amount'></label>
     <label id='moonPhases' class='amount'></label><br>
     <label id='moonPhasesNumber' class='amount'></label><br>
+    <label id='getDateFromDayNum' class='amount'></label><br>
 </body>
 
 </html>
