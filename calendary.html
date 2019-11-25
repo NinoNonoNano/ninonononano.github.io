@@ -9,15 +9,20 @@
     </style>
     <script>
         window.onload = function() {
-            generateDate();
+            const DAY = 2;
+            const YEAR = 4709;
+            generateDate(DAY, YEAR);
         };
 
-        function generateDate() {
+        function generateDateFromUser() {
+            generateDate(document.getElementById("inp_day").value, document.getElementById("inp_year").value);
+        }
+
+        function generateDate(DAY, YEAR) {
             // DATA INIZIO 343 4708 = 9 dicembre 2019 bla bla
             // ANNO CORRENTE + 2689
 
-            const DAY = 2;
-            const YEAR = 4709;
+
             var months = ['Abadius', 'Calistril', 'Pharast', 'Gozran', 'Desnus', 'Sarenith', 'Erastus', 'Arodus', 'Rova', 'Lamashan', 'Neth', 'Kuthona'];
             var day = ['Moonday', 'Toilday', 'Wealday', 'Oathday', 'Fireday', 'Starday', 'Sunday'];
             var moonPhases = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
@@ -82,6 +87,9 @@
 </head>
 
 <body>
+    <input name='day' type='number' id='inp_day' />
+    <input name='year' type='number' id='inp_year' />
+    <button onclick=generateDateFromUser()>Calcola</button>
     <label id='day' class='amount'></label>
     <label id='date' class='amount'></label>
     <label id='moonPhases' class='amount'></label><br>
