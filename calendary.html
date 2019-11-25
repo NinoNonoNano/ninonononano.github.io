@@ -1,88 +1,90 @@
 <html>
-    <head>
-        <title>Generatore di Tesori</title> 
-        <style>
-            .amount{
-                margin:50px;
+
+<head>
+    <title>Generatore di Tesori</title>
+    <style>
+        .amount {
+            margin: 50px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            generateDate();
+        };
+
+        function generateDate() {
+            // DATA INIZIO 343 4708 = 9 dicembre 2019 bla bla
+            // ANNO CORRENTE + 2689
+
+            const DAY = 2;
+            const YEAR = 4709;
+            var months = ['Abadius', 'Calistril', 'Pharast', 'Gozran', 'Desnus', 'Sarenith', 'Erastus', 'Arodus', 'Rova', 'Lamashan', 'Neth', 'Kuthona'];
+            var day = ['Moonday', 'Toilday', 'Wealday', 'Oathday', 'Fireday', 'Starday', 'Sunday'];
+            var moonPhases = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
+            var STARTDATE = new Date(getDateFromDayNum(DAY, YEAR));
+            document.getElementById('date').innerHTML = day[STARTDATE.getDay()] + ' ' + STARTDATE.getDate() + ' ' + months[STARTDATE.getMonth()] + ' ' + STARTDATE.getFullYear();
+            document.getElementById('day').innerHTML = getDayNumFromDate(STARTDATE);
+            document.getElementById('moonPhases').innerHTML = moonPhases[(getMoonPhase(STARTDATE))];
+        }
+
+        function getDayNumFromDate(date) {
+            var now = new Date(date);
+            var start = new Date(now.getFullYear(), 0, 0);
+            var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+            var oneDay = 1000 * 60 * 60 * 24;
+            var day = Math.floor(diff / oneDay);
+            return day;
+        }
+
+        function getMoonPhase(date) {
+            var day = date.getDay();
+            var month = date.getMonth();
+            var year = date.getFullYear();
+            var c = e = jd = b = 0;
+
+            if (month < 3) {
+                year--;
+                month += 12;
             }
-        </style>
-        <script>
-                window.onload = function() {
-                    generateDate();
-                };
 
-                function generateDate(){
-                    // DATA INIZIO 343 4708 = 9 dicembre 2019 bla bla
-                    // ANNO CORRENTE + 2689
+            ++month;
 
-                    const DAY = 2;
-                    const YEAR = 4709;
-                    var months = ['Abadius','Calistril','Pharast','Gozran','Desnus','Sarenith','Erastus','Arodus','Rova','Lamashan','Neth','Kuthona'];
-                    var day = ['Moonday','Toilday','Wealday','Oathday','Fireday','Starday','Sunday'];
-                    var moonPhases = ['🌑','🌒','🌓','🌔','🌕','🌖','🌗','🌘'];
-                    var STARTDATE = new Date(getDateFromDayNum(DAY,YEAR));
-                    document.getElementById('date').innerHTML = day[STARTDATE.getDay()] + ' ' + STARTDATE.getDate() + ' ' + months[STARTDATE.getMonth()] + ' ' + STARTDATE.getFullYear();
-                    document.getElementById('day').innerHTML = getDayNumFromDate(STARTDATE);
-                    document.getElementById('moonPhases').innerHTML = moonPhases[(getMoonPhase(STARTDATE))];
-                }
+            c = 365.25 * year;
+            e = 30.6 * month;
+            jd = c + e + day - 694039.09; //jd is total days elapsed
+            jd /= 29.5305882; //divide by the moon cycle
+            b = parseInt(jd); //int(jd) -> b, take integer part of jd
+            jd -= b; //subtract integer part to leave fractional part of original jd
+            b = Math.round(jd * 8); //scale fraction from 0-8 and round
 
-                function getDayNumFromDate(date){
-                    var now = new Date(date);
-                    var start = new Date(now.getFullYear(), 0, 0);
-                    var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
-                    var oneDay = 1000 * 60 * 60 * 24;
-                    var day = Math.floor(diff / oneDay);
-                    return day;
-                }
+            if (b >= 8) {
+                b = 0; //0 and 8 are the same so turn 8 into 0
+            }
 
-                function getMoonPhase(date){
-                    var day = date.getDay();
-                    var month = date.getMonth();
-                    var year = date.getFullYear();
-                    var c = e = jd = b = 0;
+            return b;
+        }
 
-                    if (month < 3) {
-                        year--;
-                        month += 12;
-                    }
+        var getDateFromDayNum = function(dayNum, year) {
 
-                    ++month;
+            var date = new Date();
+            if (year) {
+                date.setFullYear(year);
+            }
+            date.setMonth(0);
+            date.setDate(0);
+            var timeOfFirst = date.getTime(); // this is the time in milliseconds of 1/1/YYYY
+            var dayMilli = 1000 * 60 * 60 * 24;
+            var dayNumMilli = dayNum * dayMilli;
+            date.setTime(timeOfFirst + dayNumMilli);
+            return date;
+        }
+    </script>
+</head>
 
-                    c = 365.25 * year;
-                    e = 30.6 * month;
-                    jd = c + e + day - 694039.09; //jd is total days elapsed
-                    jd /= 29.5305882; //divide by the moon cycle
-                    b = parseInt(jd); //int(jd) -> b, take integer part of jd
-                    jd -= b; //subtract integer part to leave fractional part of original jd
-                    b = Math.round(jd * 8); //scale fraction from 0-8 and round
+<body>
+    <label id='day' class='amount'></label>
+    <label id='date' class='amount'></label>
+    <label id='moonPhases' class='amount'></label><br>
+</body>
 
-                    if (b >= 8 ) {
-                        b = 0; //0 and 8 are the same so turn 8 into 0
-                    }
-                    
-                    return b;
-                }
-
-                var getDateFromDayNum = function(dayNum, year){
-
-                    var date = new Date();
-                    if(year){
-                        date.setFullYear(year);
-                    }
-                    date.setMonth(0);
-                    date.setDate(0);
-                    var timeOfFirst = date.getTime(); // this is the time in milliseconds of 1/1/YYYY
-                    var dayMilli = 1000 * 60 * 60 * 24;
-                    var dayNumMilli = dayNum * dayMilli;
-                    date.setTime(timeOfFirst + dayNumMilli);
-                    return date;
-                }
-            </script>
-    </head>
-    <body>
-        <label id='day' class='amount'></label>
-        <label id='date' class='amount'></label>
-        <label id='moonPhases' class='amount'></label><br>
-    </body>
 </html>
->>>>>>> Primo commit
