@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <title>Generatore di Tesori</title>
+    <style>
+        .amount {
+            margin: 50px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+
+            const Ferdinando = [13, 18];
+            const Fabio = [17, 19];
+            const Vicio = [];
+            const Eva = [];
+            const Marco = [];
+            const Christina = [];
+            const Dario = [];
+            const Roberta = [];
+            const Manlio = [];
+
+            makeCodec(Ferdinando[0], Ferdinando[1]);
+        };
+
+        function makeCodec(num1, num2) {
+            d20Original = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+            d20Original.sort(() => Math.random() - 0.5);
+
+            console.log(d20Original);
+
+
+            console.log('Primo tiro: ' + d20Original[num1]);
+            console.log('secondo tiro: ' + d20Original[num2]);
+        }
+    </script>
+</head>
+
+<body>
+    <label id='getDateFromDayNum' class='amount'></label><br>
+</body>
+
+</html>
+
+<body>
+    <input name='day' type='number' id='inp_day' />
+    <input name='year' type='number' id='inp_year' />
+    <button onclick=generateDateFromUser()>Calcola</button>
+    <label id='day' class='amount'></label>
+    <label id='date' class='amount'></label>
+    <label id='moonPhases' class='amount'></label><br>
+    <label id='moonPhasesNumber' class='amount'></label><br>
+    <label id='getDateFromDayNum' class='amount'></label><br>
+</body>
+
+</html>
