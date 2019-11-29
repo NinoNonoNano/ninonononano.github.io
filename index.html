@@ -11,17 +11,15 @@
 		  <a-box position='0 0.5 0' material='color: red;'></a-box>
 		</a-marker>
 
-		<!-- handle marker with hiro preset -->
-		<a-marker preset='hiro'>
-		  <a-box position='0 0.5 0' material='color: green;'></a-box>
-		</a-marker>
-		  
+		<!-- here is a hiro preset -->
+		<a-marker preset='hiro'></a-marker>
+		<!-- it is the same as the marker below -->
 		<a-marker type='pattern' url='http://examples.org/hiro.patt'></a-marker>
 
-		<!-- handle barcode marker -->
-		<a-marker type='barcode' value='5'>
-		  <a-box position='0 0.5 0' material='color: blue;'></a-box>
-		</a-marker>
+		<!-- here is a kanji preset -->
+		<a-marker preset='kanji'></a-marker>
+		<!-- it is the same as the marker below -->
+		<a-marker type='pattern' url='http://examples.org/kanji.patt'></a-marker>
 
 		<!-- add a simple camera -->
 		<a-entity camera></a-entity>
