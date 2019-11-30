@@ -4,11 +4,11 @@
 <script src="https://raw.githack.com/jeromeetienne/AR.js/1.7.5/aframe/build/aframe-ar.js"></script>
   <body style='margin : 0px; overflow: hidden;'>
     <a-scene stats embedded arjs='sourceType: webcam; detectionMode: mono; maxDetectionRate: 30; canvasWidth: 240; canvasHeight: 180'>
-        <a-marker preset="hiro">
+        <a-marker preset="hiro" type='patter'>
                 <a-cylinder position='0 0 0' radius='0.5' height='0.2' color='red' opacity='0.8'></a-cylinder>
         </a-marker>
         <a-entity camera></a-entity>
-        <a-marker preset="kanji">
+        <a-marker preset="kanji" type='patter'>
             <a-cylinder position='0 0 0' radius='0.5' height='0.2' color='blue' opacity='0.8'></a-cylinder>
         </a-marker>
         <a-entity camera></a-entity>
